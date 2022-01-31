@@ -15,7 +15,7 @@ public class TestProject {
         WebDriverManager.chromedriver().setup();
         Configuration.browser = "chrome";
         Configuration.driverManagerEnabled =true;
-      //  Configuration.browserSize = "1920*1080";
+        Configuration.browserSize = "1920x1080";
         Configuration.headless = false;
     }
 
