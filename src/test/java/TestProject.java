@@ -1,11 +1,46 @@
 import org.junit.Test;
+import org.openqa.selenium.WebDriverException;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestProject {
 
+    private final static int MAX_RETRY_COUNT = 5;
+
+
+
     @Test
     public void openSite(){
-        open("https://google.com");
+
+
+        int retryCount = 0;
+        while(true)
+        {
+            try
+            {
+                open("https://google.com");
+                break;
+            }
+            catch(WebDriverException e)
+            {
+                if( retryCount > MAX_RETRY_COUNT )
+                {
+                    throw new RuntimeException("Too many retries...", e);
+                }
+
+
+                retryCount++;
+                try
+                {
+                    Thread.sleep(2_000);
+                }
+                catch (InterruptedException interruptedException)
+                {
+                    interruptedException.printStackTrace();
+                }
+                continue;
+            }
+        }
+
     }
 }
